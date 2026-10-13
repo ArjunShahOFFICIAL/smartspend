@@ -13,8 +13,10 @@ import {
 } from "recharts";
 import AuthPage from "./AuthPage";
 
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:8080/api/transactions";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+
+const API_URL = `${API_BASE_URL}/api/transactions`;
 
 const CHART_COLORS = ["#34d399", "#facc15", "#60a5fa", "#f97316", "#c084fc", "#fb7185"];
 
