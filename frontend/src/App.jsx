@@ -142,23 +142,26 @@ function App() {
   }, []);
 
   async function loadDashboard() {
-    setIsLoading(true);
+  setIsLoading(true);
 
-    try {
-      const response = await fetch(API_URL);
+  try {
+    const response = await fetch(API_URL, {
+      headers: {
+        "X-User-Id": String(user.id),
+      },
+    });
 
-      if (!response.ok) {
-        throw new Error("Could not load financial data.");
-      }
-
-      setTransactions(await response.json());
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
+    if (!response.ok) {
+      throw new Error("Could not load financial data.");
     }
-  }
 
+    setTransactions(await response.json());
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setIsLoading(false);
+  }
+}
   function handleLogin(userInfo) {
     localStorage.setItem("smartspend_user", JSON.stringify(userInfo));
     setUser(userInfo);
